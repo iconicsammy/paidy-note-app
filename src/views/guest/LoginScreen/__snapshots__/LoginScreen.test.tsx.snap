@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Screen renders correctly 1`] = `
+<View
+  accessibilityIgnoresInvertColors={true}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "marginTop": 15,
+    }
+  }
+>
+  <Image
+    resizeMode="cover"
+    source={1}
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "height": undefined,
+          "width": undefined,
+        },
+        undefined,
+      ]
+    }
+  />
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Array [
+          Object {
+            "textAlign": "left",
+          },
+          Object {
+            "color": "rgba(28, 27, 31, 0.87)",
+            "writingDirection": "ltr",
+          },
+          Array [
+            Object {
+              "fontSize": 20,
+              "letterSpacing": 0.15,
+              "lineHeight": 30,
+              "marginVertical": 2,
+            },
+            undefined,
+          ],
+        ],
+      ]
+    }
+  >
+    Note Taker
+  </Text>
+  <Text
+    testID="txtWarning"
+  >
+    Your device doesn't support facial, eye or finger print auth
+  </Text>
+</View>
+`;
