@@ -11,9 +11,7 @@ import Note from "application/models/Note";
 class ServiceNotes {
 
     private static instance: ServiceNotes;
-    private db = new NotesDatabase();
-
-
+    
     constructor() {
         if (!ServiceNotes.instance) {
             ServiceNotes.instance = this;
@@ -21,6 +19,8 @@ class ServiceNotes {
 
         return ServiceNotes.instance;
     }
+
+    private db = new NotesDatabase();
 
     async getNotes(): Promise<Note[]> {
 

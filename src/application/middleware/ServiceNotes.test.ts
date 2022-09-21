@@ -1,5 +1,8 @@
+jest.mock('expo-sqlite')
+
 
 import Logger from "application/Analytics/Logger";
+
 import NotesDatabase from "application/localDatabase/NotesDatabase";
 import Note from "application/models/Note";
 import ServiceNotes from "./ServiceNotes";
@@ -8,6 +11,7 @@ describe("Service Notes", () => {
 
     let spyAddNewNote: any;
     let spyDeleteNote: any;
+
     let spyLoggerError: any;
 
     beforeEach(() => {
@@ -16,28 +20,27 @@ describe("Service Notes", () => {
         spyLoggerError = jest.spyOn(Logger, "logError");
     })
 
-    afterEach(()=>{
+    afterEach(() => {
         jest.restoreAllMocks();
     })
 
 
-    it("should add new note", async () =>{
+    fit("should add new note", async () => {
         spyAddNewNote.mockResolvedValue(144);
-        const note = new Note( 0, "title", "content");
-        try {
-            const noteUpdated = await ServiceNotes.addNewNote("title", "content");
-            expect(noteUpdated.id).toStrictEqual(144)
+        const note = new Note(0, "title", "content");
+
+        const noteUpdated = await ServiceNotes.addNewNote("title", "content");
     
-            expect(spyAddNewNote).toHaveBeenCalledWith(note);
-            expect(spyLoggerError).not.toHaveBeenCalled();
-        } catch (error) {
-            console.log(34, error)
-        }
- 
+        expect(noteUpdated.id).toStrictEqual(144)
+
+        expect(spyAddNewNote).toHaveBeenCalled();
+        expect(spyLoggerError).not.toHaveBeenCalled();
+
+
 
     })
 
-    it("should add new note - handle error", async () =>{
+    fit("should add new note - handle error", async () => {
         spyAddNewNote.mockRejectedValue("error adding note");
         spyLoggerError.mockReturnValue(true);
         const note = new Note(0, "title", "content");
@@ -48,21 +51,21 @@ describe("Service Notes", () => {
             expect(spyAddNewNote).toHaveBeenCalledWith(note);
             expect(spyLoggerError).toHaveBeenCalledWith(error)
         }
-      
+
 
     })
 
-    it("should delete note - deleted", async () =>{
+    fit("should delete note - deleted", async () => {
         spyDeleteNote.mockResolvedValue(1);
-    
+
         const result = await ServiceNotes.deleteNote(1);
         expect(result).toStrictEqual(true)
 
     })
 
-    it("should delete note - ID not found", async () =>{
+    fit("should delete note - ID not found", async () => {
         spyDeleteNote.mockResolvedValue(0);
-    
+
         const result = await ServiceNotes.deleteNote(1);
         expect(result).toStrictEqual(false)
 
